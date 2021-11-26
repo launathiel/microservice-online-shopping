@@ -1,0 +1,113 @@
+#####################
+# SHOPPING SERVCICE #
+#####################
+apiVersion: v1
+kind: Service
+metadata:
+  name: shopping
+  labels:
+    app: shopping
+    service: shopping
+spec:
+  ports:
+  - port: 8003
+    name: http
+  selector:
+    app: shopping
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: shopping
+  labels:
+    account: shopping
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shopping-v1
+  labels:
+    app: shopping
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shopping
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: shopping
+        version: v1
+    spec:
+      serviceAccountName: shopping
+      containers:
+      - name: shopping-service
+        image: launathiel/microservice-ecommerce-shopping-service:1.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8003
+        securityContext:
+          runAsUser: 1000
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        env:
+        - name: MESSAGE
+          value: 'This is Kubernetes Environment!'
+        - name: PORT
+          value: "8001"
+        - name: APP_SECRET
+          valueFrom:
+            configMapKeyRef:
+              name: shopping-config
+              key: APP_SECRET
+        ## MONGO DB ENVIRONMENT
+        - name: MONGO_ROOT_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-credentials
+              key: user
+        - name: MONGO_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-credentials
+              key: password
+        - name: DB_HOST
+          value: mongodb-service.shopping.svc.cluster.local
+        - name: DB_NAME
+          value: shopping
+        ## RABBITMQ ENVIRONMENT
+        - name: RABBITMQ_USER
+          valueFrom:
+            configMapKeyRef:
+              name: shopping-config
+              key: RABBITMQ_USER
+        - name: RABBITMQ_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: shopping-config
+              key: RABBITMQ_PASSWORD
+        - name: RABBITMQ_HOST
+          value: rabbitmq-headless.rabbitmq.svc.cluster.local
+        - name: EXCHANGE_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: shopping-config
+              key: EXCHANGE_NAME
+        - name: CUSTOMER_BINDING_KEY
+          valueFrom:
+            configMapKeyRef:
+              name: shopping-config
+              key: CUSTOMER_BINDING_KEY
+        - name: SHOPPING_BINDING_KEY
+          valueFrom:
+            configMapKeyRef:
+              name: shopping-config
+              key: SHOPPING_BINDING_KEY
+        

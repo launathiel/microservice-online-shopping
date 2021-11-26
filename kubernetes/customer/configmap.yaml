@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: customer-config
+data:
+  APP_SECRET: 'this-is-a-secret'
+  # RABBITMQ #
+  RABBITMQ_USER: 'guest'
+  RABBITMQ_PASSWORD: 'guest'
+  EXCHANGE_NAME: 'ONLINE_SHOPPING'
+  CUSTOMER_BINDING_KEY: 'CUSTOMER_SERVICE'
+  QUEUE_NAME: 'CUSTOMER_QUEUE'

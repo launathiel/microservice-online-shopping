@@ -1,0 +1,113 @@
+######################
+# CUSTOMER SERVCICE #
+#####################
+apiVersion: v1
+kind: Service
+metadata:
+  name: customer
+  labels:
+    app: customer
+    service: customer
+spec:
+  ports:
+  - port: 8001
+    name: http
+  selector:
+    app: customer
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: customer
+  labels:
+    account: customer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer-v1
+  labels:
+    app: customer
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: customer
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: customer
+        version: v1
+    spec:
+      serviceAccountName: customer
+      containers:
+      - name: customer-service
+        image: launathiel/microservice-ecommerce-customer-service:1.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8001
+        securityContext:
+          runAsUser: 1000
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        env:
+        - name: MESSAGE
+          value: 'This is Kubernetes Environment!'
+        - name: PORT
+          value: "8001"
+        - name: APP_SECRET
+          valueFrom:
+            configMapKeyRef:
+              name: customer-config
+              key: APP_SECRET
+        ## MONGO DB ENVIRONMENT
+        - name: MONGO_ROOT_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-credentials
+              key: user
+        - name: MONGO_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-credentials
+              key: password
+        - name: DB_HOST
+          value: mongodb-service.customer.svc.cluster.local
+        - name: DB_NAME
+          value: customer
+        ## RABBITMQ ENVIRONMENT
+        - name: RABBITMQ_USER
+          valueFrom:
+            configMapKeyRef:
+              name: customer-config
+              key: RABBITMQ_USER
+        - name: RABBITMQ_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: customer-config
+              key: RABBITMQ_PASSWORD
+        - name: RABBITMQ_HOST
+          value: rabbitmq-headless.rabbitmq.svc.cluster.local
+        - name: EXCHANGE_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: customer-config
+              key: EXCHANGE_NAME
+        - name: CUSTOMER_BINDING_KEY
+          valueFrom:
+            configMapKeyRef:
+              name: customer-config
+              key: CUSTOMER_BINDING_KEY
+        - name: QUEUE_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: customer-config
+              key: QUEUE_NAME
+        
