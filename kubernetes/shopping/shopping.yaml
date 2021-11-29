@@ -44,7 +44,7 @@ spec:
       serviceAccountName: shopping
       containers:
       - name: shopping-service
-        image: launathiel/microservice-ecommerce-shopping-service:1.0
+        image: launathiel/microservice-ecommerce-shopping-service:1.1
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8003

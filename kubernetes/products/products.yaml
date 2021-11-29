@@ -44,7 +44,7 @@ spec:
       serviceAccountName: products
       containers:
       - name: products-service
-        image: launathiel/microservice-ecommerce-products-service:1.0
+        image: launathiel/microservice-ecommerce-products-service:1.1
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8002
