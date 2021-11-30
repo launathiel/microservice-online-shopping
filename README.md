@@ -8,7 +8,7 @@ docker-compose -f docker.comose.yml up -d
 ## To run on Kubernetes Cluster
 ### Setup Rabbitmq Cluster
 ```bash
-chown +x ./kubernetes/rabbitmq/rabbitmq.sh # make file executable
+chmod +x ./kubernetes/rabbitmq/rabbitmq.sh # make file executable
 ./kubernetes/rabbitmq/rabbitmq.sh # run shell file
 ```
 #### Check all rabbitmq component
@@ -19,8 +19,8 @@ kubectl get all -o wide -n rabbitmq
 ### Run **Customer** Service
 #### Make file executable
 ```bash
-chown +x ./kubernetes/customer/mongodb.sh
-chown +x ./kubernetes/customer/customer.sh
+chmod +x ./kubernetes/customer/mongodb.sh
+chmod +x ./kubernetes/customer/customer.sh
 ```
 #### Deploy customer database
 ```bash
@@ -34,8 +34,8 @@ chown +x ./kubernetes/customer/customer.sh
 ### Run **Products** Service
 #### Make file executable
 ```bash
-chown +x ./kubernetes/products/mongodb.sh
-chown +x ./kubernetes/products/products.sh
+chmod +x ./kubernetes/products/mongodb.sh
+chmod +x ./kubernetes/products/products.sh
 ```
 #### Deploy products database
 ```bash
@@ -49,8 +49,8 @@ chown +x ./kubernetes/products/products.sh
 ### Run **Shopping** Service
 #### Make file executable
 ```bash
-chown +x ./kubernetes/shopping/mongodb.sh
-chown +x ./kubernetes/shopping/shopping.sh
+chmod +x ./kubernetes/shopping/mongodb.sh
+chmod +x ./kubernetes/shopping/shopping.sh
 ```
 #### Deploy customer database
 ```bash
