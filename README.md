@@ -145,11 +145,11 @@ chmod +x ./kubernetes/shopping/shopping.sh
 ```
 #### Deploy shopping database
 ```bash
-./kubernetes/shopping/shopping.sh 
+./kubernetes/shopping/mongodb.sh 
 ```
 #### MongoDB init ( First Time Only )
 ```bash
-kubectl exec -ti -n products mongod-shopping-0 bash
+kubectl exec -ti -n shopping mongod-shopping-0 bash
 
 # initiate replicaset
 mongo --quiet <<EOF
@@ -185,5 +185,15 @@ exit
 
 ## Service Mesh Monitoring
 ### Prometheus
+```bash
+kubectl apply -n istio-system -f https://raw.githubusercontent.com/launathiel/microservice-online-shopping/main/kubernetes/istio/prometheus.yaml
+```
 ### Grafana
+```bash
+kubectl apply -n istio-system -f https://raw.githubusercontent.com/launathiel/microservice-online-shopping/main/kubernetes/istio/grafana.yaml
+```
 ### Kiali
+```bash
+kubectl apply -f https://raw.githubusercontent.com/launathiel/microservice-online-shopping/main/kubernetes/istio/kiali-crd.yaml
+kubectl apply -n istio-system -f https://raw.githubusercontent.com/launathiel/microservice-online-shopping/main/kubernetes/istio/kiali.yaml
+```

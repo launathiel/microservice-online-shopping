@@ -1,4 +1,4 @@
-#! bin/bash
+#!/bin/sh
 
 istioctl operator init
 kubectl create ns istio-system
