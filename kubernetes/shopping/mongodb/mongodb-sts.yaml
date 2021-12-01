@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: mongod
+  name: mongod-shopping
 spec:
   serviceName: mongodb-service
   replicas: 2
@@ -27,7 +27,7 @@ spec:
             - "MainRepSet"
           resources:
             requests:
-              cpu: "500m"
+              cpu: "10m"
               memory: 200Mi
           ports:
             - containerPort: 27017

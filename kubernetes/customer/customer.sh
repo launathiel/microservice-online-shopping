@@ -1,4 +1,4 @@
 #!/bin/sh
-kubectl apply -f secret.yaml -n customer
-kubectl apply -f configmap.yaml -n customer
-kubectl apply -f customer.yaml -n customer
+kubectl apply -n customer -f https://raw.githubusercontent.com/launathiel/microservice-online-shopping/main/kubernetes/customer/secret.yaml
+kubectl apply -n customer -f https://raw.githubusercontent.com/launathiel/microservice-online-shopping/main/kubernetes/customer/configmap.yaml
+kubectl apply -n customer -f https://raw.githubusercontent.com/launathiel/microservice-online-shopping/main/kubernetes/customer/customer.yaml

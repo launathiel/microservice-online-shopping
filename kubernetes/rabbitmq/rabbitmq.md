@@ -24,9 +24,19 @@ kubectl apply -f headless-service.yaml
 ```bash
 kubectl get all -o wide -n rabbitmq
 ```
+## Check username and password for rabbitmq
+### USERNAME
+```bash
+kubectl get secret -n rabbitmq production-rabbitmqcluster-default-user -o jsonpath='{.data.username}' | base64 --decode
+```
+### PASSWORD
+```bash
+kubectl get secret -n rabbitmq production-rabbitmqcluster-default-user -o jsonpath='{.data.password}' | base64 --decode
+```
+
 ## Using rabbitmq-perf-test to Run a Functional and Load Test of the Cluster
 ```bash
-kubectl run perf-test --image=pivotalrabbitmq/perf-test -- --uri amqp://default_user_sE5oDdB2zigtXmMAmPZ:QjdMuXFgfQvk1XQaB6hLIXMMHGvAgl8g@rabbitmq-headless.rabbitmq.svc.cluster.local
+kubectl run perf-test --image=pivotalrabbitmq/perf-test -- --uri amqp://guest:guest@rabbitmq-headless.rabbitmq.svc.cluster.local
 ```
 ## Check logs
 ```bash
