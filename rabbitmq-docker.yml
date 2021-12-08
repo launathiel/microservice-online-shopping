@@ -1,0 +1,26 @@
+version: '3.7'
+services:
+  rabbitmq-prod:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq-prod'
+    environment:
+      RABBITMQ_DEFAULT_USER: nathan
+      RABBITMQ_DEFAULT_PASS: nathan123
+    ports:
+        - "5672:5672"
+        - "15672:15672"
+    volumes:
+        - rabbitmq-prod-vol:/var/lib/rabbitmq
+        - rabbitmq-prod-log-vol:/var/log/rabbitmq
+    networks:
+      - microservice-network
+
+networks:
+  microservice-network:
+    name: microservice-network
+
+volumes:
+  rabbitmq-prod-vol:
+    name: rabbitmq-prod-vol 
+  rabbitmq-prod-log-vol:
+    name: rabbitmq-prod-log-vol
