@@ -14,21 +14,6 @@ services:
     networks:
       - microservice-network
 
-  # rabbitmq-prod:
-  #   image: rabbitmq:3-management-alpine
-  #   container_name: 'rabbitmq-prod'
-  #   environment:
-  #     RABBITMQ_DEFAULT_USER: nathan
-  #     RABBITMQ_DEFAULT_PASS: nathan123
-  #   ports:
-  #       - "5672:5672"
-  #       - "15672:15672"
-  #   volumes:
-  #       - rabbitmq-prod-vol:/var/lib/rabbitmq
-  #       - rabbitmq-prod-log-vol:/var/log/rabbitmq
-  #   networks:
-  #     - microservice-network
-
   products:
     build:
       dockerfile: Dockerfile
@@ -41,7 +26,6 @@ services:
     restart: always
     depends_on:
       - "mongodb-prod"
-      # - "rabbitmq-prod"
     networks:
       - microservice-network
 
@@ -57,7 +41,6 @@ services:
     restart: always
     depends_on:
       - "mongodb-prod"
-      # - "rabbitmq-prod"
     networks:
       - microservice-network
 
@@ -73,7 +56,6 @@ services:
     restart: always
     depends_on:
       - "mongodb-prod"
-      # - "rabbitmq-prod"
     networks:
       - microservice-network
 
@@ -99,7 +81,3 @@ volumes:
     name: mongodb-prod-vol
   mongodb-prod-config:
     name: mongodb-prod-config
-  # rabbitmq-prod-vol:
-  #   name: rabbitmq-prod-vol 
-  # rabbitmq-prod-log-vol:
-  #   name: rabbitmq-prod-log-vol

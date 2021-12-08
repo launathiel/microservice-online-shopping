@@ -7,8 +7,14 @@ git clone https://github.com/launathiel/microservice-online-shopping
 cd microservice-online-shopping
 ```
 ## Run Using Docker Compose
+### Run RabbitMQ 
 ```bash
-docker-compose -f docker.comose.yml up -d
+docker-compose -f ./rabbitmq-docker.yml up -d
+```
+note that rabbitmq succesfully running, to avoid service error because rabbitmq, **after 1 minute** run command below;
+### Run Service with DB
+```bash
+docker-compose -f ./service-with-db-docker.yml up -d
 ```
 ---
 ## Run on Kubernetes Cluster ( with Istio & RabbitMQ )
