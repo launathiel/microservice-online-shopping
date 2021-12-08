@@ -1,0 +1,48 @@
+{
+    "openapi":"3.0.2",
+    "info": {
+        "title":"Customer RESTful API",
+        "version":"1.0",
+        "description": "OpenAPI for customer service, the part of online shop microservice",
+        "termsOfService": "https://launathiel.com",
+        "contact": {
+            "name": "Laurentius Nathaniel",
+            "url": "https://launathiel.com",
+            "email": "launathiel@gmail.com"
+        },
+        "license": {
+            "name": "APACHE 2.0",
+            "url": "https://www.apache.org/license/LICENSE-2.0"
+        }
+    },
+    "servers": [
+        {
+            "description": "Customer service",
+            "url": "https://{environment}.launathiel/api/v1",
+            "variables": {
+                "environment": {
+                    "description": "Server Environment",
+                    "default": "dev",
+                    "enum": [
+                        "dev",
+                        "qa",
+                        "prod"
+                    ]
+                }
+            }
+        }
+    ],
+    "paths": {
+        "/signup": {
+            "get": {
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    }
+}

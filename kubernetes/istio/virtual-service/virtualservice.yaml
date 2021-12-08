@@ -1,0 +1,47 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: customer
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - gateway
+  http:
+    - route:
+        - destination:
+            host: customer.customer.svc.cluster.local
+            port:
+              number: 8001
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: products
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - gateway
+  http:
+    - route:
+        - destination:
+            host: products.products.svc.cluster.local
+            port:
+              number: 8002
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: shopping
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - gateway
+  http:
+    - route:
+        - destination:
+            host: shopping.shopping.svc.cluster.local
+            port:
+              number: 8003
