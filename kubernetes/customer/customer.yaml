@@ -44,7 +44,7 @@ spec:
       serviceAccountName: customer
       containers:
       - name: customer-service
-        image: launathiel/microservice-ecommerce-customer-service:1.1
+        image: launathiel/microservice-ecommerce-customer-service:1.2
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8001

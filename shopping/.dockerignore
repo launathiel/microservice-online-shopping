@@ -4,3 +4,5 @@ Dockerfile
 .dockerignore
 app_error.log
 .gitignore
+shopping.json
+src/sampledata.json

@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index.js",
+    "start": "node src/index.js",
     "prod" : "NODE_ENV=prod nodemon src/index.js",
-    "dev": "NODE_ENV=dev nodemon src/index.js",
-    "test": "NODE_ENV=test nodemon src/index.js"
+    "dev": "NODE_ENV=dev node src/index.js",
+    "test": "NODE_ENV=test node src/index.js"
   },
   "keywords": [],
   "author": "",

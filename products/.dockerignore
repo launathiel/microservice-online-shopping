@@ -4,3 +4,5 @@ Dockerfile
 .dockerignore
 app_error.log
 .gitignore
+products.json
+src/sampledata.json
