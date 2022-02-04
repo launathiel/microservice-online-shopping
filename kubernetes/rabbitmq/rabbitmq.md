@@ -36,7 +36,7 @@ kubectl get secret -n rabbitmq production-rabbitmqcluster-default-user -o jsonpa
 
 ## Using rabbitmq-perf-test to Run a Functional and Load Test of the Cluster
 ```bash
-kubectl run perf-test --image=pivotalrabbitmq/perf-test -- --uri amqp://guest:guest@rabbitmq-headless.rabbitmq.svc.cluster.local
+kubectl run perf-test --image=pivotalrabbitmq/perf-test -- --uri amqp://guest:guest@rabbitmq-headless.rabbitmq.svc
 ```
 ## Check logs
 ```bash
