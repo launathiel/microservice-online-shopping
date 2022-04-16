@@ -1,18 +1,36 @@
 apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: my-gateway
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "launathiel.com"
+---
+apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: customer
 spec:
   hosts:
-    - "*"
+    - "launathiel.com"
   gateways:
-    - gateway
+    - my-gateway
   http:
-    - route:
-        - destination:
-            host: customer.customer.svc.cluster.local
-            port:
-              number: 8001
+  - match:
+    - uri:
+        prefix: /customer/?(.*)
+    route:
+    - destination:
+        host: customer.customer.svc #nama service cluster IP
+        port:
+          number: 8001
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -20,15 +38,18 @@ metadata:
   name: products
 spec:
   hosts:
-    - "*"
+    - "launathiel.com"
   gateways:
-    - gateway
+    - my-gateway
   http:
-    - route:
-        - destination:
-            host: products.products.svc.cluster.local
-            port:
-              number: 8002
+  - match:
+    - uri:
+        prefix: /products/?(.*)
+    route:
+    - destination:
+        host: products.products.svc #nama service cluster IP
+        port:
+          number: 8002
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -36,12 +57,15 @@ metadata:
   name: shopping
 spec:
   hosts:
-    - "*"
+    - "launathiel.com"
   gateways:
-    - gateway
+    - my-gateway
   http:
-    - route:
-        - destination:
-            host: shopping.shopping.svc.cluster.local
-            port:
-              number: 8003
+  - match:
+    - uri:
+        prefix: /shopping/?(.*)
+    route:
+    - destination:
+        host: shopping.shopping.svc #nama service cluster IP
+        port:
+          number: 8003
