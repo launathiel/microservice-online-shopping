@@ -1,5 +1,7 @@
 # Microservice Online Shopping
 Built using express js, message broker using rabbitmq and containerized by docker. Now in progess to implement with service mesh paradigm in kubernetes cluster.
+## Architecture
+![](docs/diagram/diagram.png)
 ### **Clone Repository** 
 ```bash
 git clone https://github.com/launathiel/microservice-online-shopping
