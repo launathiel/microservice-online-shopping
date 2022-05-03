@@ -44,19 +44,19 @@ spec:
       serviceAccountName: shopping
       containers:
       - name: shopping-service
-        image: launathiel/microservice-ecommerce-shopping-service:1.2
+        image: launathiel/shopping-service:v0.0.1
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8003
         securityContext:
           runAsUser: 1000
-        # resources:
-        #   requests:
-        #     memory: "64Mi"
-        #     cpu: "250m"
-        #   limits:
-        #     memory: "128Mi"
-        #     cpu: "500m"
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "150m"
         env:
         - name: MESSAGE
           value: 'This is Kubernetes Environment!'

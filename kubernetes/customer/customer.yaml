@@ -44,19 +44,19 @@ spec:
       serviceAccountName: customer
       containers:
       - name: customer-service
-        image: launathiel/microservice-ecommerce-customer-service:1.2
+        image: launathiel/customer-service:v0.0.1
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8001
         securityContext:
           runAsUser: 1000
-        # resources:
-        #   requests:
-        #     memory: "64Mi"
-        #     cpu: "250m"
-        #   limits:
-        #     memory: "128Mi"
-        #     cpu: "500m"
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "150m"
         env:
         - name: MESSAGE
           value: 'This is Kubernetes Environment!'
