@@ -4,17 +4,17 @@ metadata:
   name: production-rabbitmqcluster
   namespace: rabbitmq
 spec:
-  replicas: 1
+  replicas: 3
   persistence:
     storageClassName: standard
-    storage: 2Gi
+    storage: 5Gi
   resources:
     requests:
       cpu: 500m
       memory: 1Gi
-    # limits:
-    #   cpu: 500m
-    #   memory: 1Gi
+    limits:
+      cpu: 500m
+      memory: 1Gi
   rabbitmq:
     additionalConfig: |
       log.console.level = info
