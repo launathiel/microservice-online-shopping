@@ -15,6 +15,7 @@ spec:
       containers:
       - name: reverse-proxy
         image: launathiel/microsvc_reverse-proxy:v0.0.3
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
         resources:
