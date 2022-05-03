@@ -8,7 +8,19 @@ spec:
   gateways:
     - pepagomyid-gateway
   http:
-  - match:
+  - name: default
+    match:
+    - uri:
+        regex: /
+    rewrite:
+      uri: /
+    route:
+    - destination:
+        host: reverse-proxy.proxy.svc.cluster.local #nama service cluster IP
+        port:
+          number: 80
+  - name: api
+    match:
     - uri:
         regex: /api/v1/?(.*)
     route:
