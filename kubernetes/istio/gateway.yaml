@@ -1,0 +1,27 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: pepagomyid-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPs
+    tls:
+      mode: SIMPLE
+      credentialName: pepagomyid-domain-cert-prod
+    hosts:
+    - "*.pepago.my.id"
+    - "pepago.my.id"
+  - port:
+      name: http-redirect
+      number: 80
+      protocol: HTTP
+    tls:
+      httpsRedirect: true
+    hosts:
+    - "*.pepago.my.id"
+    - "pepago.my.id"
