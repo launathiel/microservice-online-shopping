@@ -206,3 +206,5 @@ kubectl apply -n istio-system -f https://raw.githubusercontent.com/launathiel/mi
 kubectl apply -f https://raw.githubusercontent.com/launathiel/microservice-online-shopping/main/kubernetes/istio/kiali-crd.yaml
 kubectl apply -n istio-system -f https://raw.githubusercontent.com/launathiel/microservice-online-shopping/main/kubernetes/istio/kiali.yaml
 ```
+
+> keep exploring!
